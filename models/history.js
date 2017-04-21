@@ -20,7 +20,7 @@ var HistorySchema = new Schema({
     type: Date
   },
   distancebetween: {
-    type: Number
+    type: String
   },
 });
 

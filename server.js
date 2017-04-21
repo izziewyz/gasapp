@@ -1,15 +1,26 @@
-// Include Server Dependencies
+/* Showing Mongoose's "Populated" Method (18.3.8)
+ * INSTRUCTOR ONLY
+ * =============================================== */
+
+// Dependencies
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-
-// Require History Schema
+// Requiring our Note and Article models
 var History = require("./models/History");
+// Our scraping tools
+var axios = require("axios");
+var request = require("request");
+var cheerio = require("cheerio");
+// Set mongoose to leverage built in JavaScript ES6 Promises
+mongoose.Promise = Promise;
 
-// Create Instance of Express
+
+// Initialize Express
 var app = express();
-// Sets an initial port. We'll use this later in our listener
+
+// Use morgan and body parser with our app
 var PORT = process.env.PORT || 3000;
 
 // Run Morgan for Logging
@@ -78,18 +89,18 @@ app.get("/apisearch", function(req, res) {
 
 // This is the route we will send POST requests to save each search.
 app.post("/api", function(req, res) {
-  console.log("BODY: " + req.body.distancebetween);
+    //console.log("BODY: " + req.body.distancebetween);
 
   // Here we'll save the location based on the JSON input.
   // We'll use Date.now() to always get the current date time
   History.create({
-    name: req.body.username,
-    email: req.body.contact,
+    // name: req.body.username,
+    // email: req.body.contact,
     location1: req.body.location1,
     location2: req.body.location2,
     
     date: Date.now(),
-    distancebetween: req.body.distancebetween,
+    //distancebetween: req.body.distance,
   }, function(err) {
     if (err) {
       console.log(err);
