@@ -33,7 +33,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static("./public"));
 
 // -------------------------------------------------
-var databaseUri = 'mongodb://localhost:27017/zoo';
+var databaseUri = 'mongodb://<myUserAdmin>:<abc123>@ds115071.mlab.com:15071/heroku_m8v5lfsj';
 // MongoDB Configuration configuration (Change this URL to your own DB)
 
 
