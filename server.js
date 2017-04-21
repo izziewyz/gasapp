@@ -33,9 +33,23 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 app.use(express.static("./public"));
 
 // -------------------------------------------------
-
+var databaseUri = 'mongodb://localhost:27017/zoo';
 // MongoDB Configuration configuration (Change this URL to your own DB)
-mongoose.connect("mongodb://localhost:27017/zoo");
+
+
+if (process.env.MONGODB_URI){
+  mongoose.connect(process.env.MONGODB_URI);
+} else{
+  mongoose.connect(databaseUri);
+};
+
+
+
+
+//mongoose.connect("mongodb://localhost:27017/zoo");
+
+
+
 var db = mongoose.connection;
 
 db.on("error", function(err) {
